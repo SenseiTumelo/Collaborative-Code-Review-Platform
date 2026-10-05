@@ -1,1 +1,37 @@
-{"name":"collaborative-code-review-platform","version":"1.0.0","private":true,"scripts":{"dev":"tsx watch src/server.ts","build":"tsc","start":"node dist/server.js","db:migrate":"tsx src/migrate.ts","test":"tsx --test tests/*.test.ts"},"dependencies":{"bcryptjs":"^3.0.2","cors":"^2.8.5","dotenv":"^17.2.3","express":"^5.1.0","helmet":"^8.1.0","jsonwebtoken":"^9.0.2","pg":"^8.16.3","ws":"^8.18.3","zod":"^4.1.12","express-rate-limit":"^8.1.0"},"devDependencies":{"@types/cors":"^2.8.19","@types/express":"^5.0.3","@types/jsonwebtoken":"^9.0.10","@types/node":"^22.0.0","@types/pg":"^8.15.5","@types/ws":"^8.18.1","typescript":"^5.9.3","tsx":"^4.20.6","supertest":"^7.1.4","@types/supertest":"^6.0.3","pg-mem":"^3.0.5"}}
+{
+  "name": "collaborative-code-review-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:migrate": "tsx src/migrate.ts",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "ws": "^8.18.3",
+    "zod": "^4.1.12",
+    "express-rate-limit": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.15.5",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.9.3",
+    "tsx": "^4.20.6",
+    "supertest": "^7.1.4",
+    "@types/supertest": "^6.0.3",
+    "pg-mem": "^3.0.5"
+  }
+}

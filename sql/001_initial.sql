@@ -3,14 +3,17 @@ CREATE TABLE IF NOT EXISTS users (
  password_hash TEXT NOT NULL, role TEXT NOT NULL CHECK (role IN ('reviewer','submitter')),
  display_picture TEXT, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 CREATE TABLE IF NOT EXISTS projects (
  id SERIAL PRIMARY KEY, name TEXT NOT NULL, description TEXT NOT NULL DEFAULT '',
  owner_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 CREATE TABLE IF NOT EXISTS project_members (
  project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE, PRIMARY KEY(project_id,user_id)
 );
+
 CREATE TABLE IF NOT EXISTS submissions (
  id SERIAL PRIMARY KEY, project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
  author_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -18,6 +21,7 @@ CREATE TABLE IF NOT EXISTS submissions (
  status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','in_review','approved','changes_requested')),
  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 CREATE TABLE IF NOT EXISTS comments (
  id SERIAL PRIMARY KEY, submission_id INTEGER NOT NULL REFERENCES submissions(id) ON DELETE CASCADE,
  author_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, body TEXT NOT NULL,
