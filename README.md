@@ -8,10 +8,8 @@ Requires Node.js 22+ and PostgreSQL (or Docker Desktop).
 
 ```powershell
 npm install
-Copy-Item .env.example .env
 ```
 
-Edit `.env`: set your PostgreSQL connection URL and replace JWT_SECRET with a random secret of at least 32 characters. Do not commit `.env`.
 
 If using Docker:
 
@@ -52,37 +50,38 @@ Tests use an isolated in-memory PostgreSQL emulator and never touch your configu
 
 All routes except health, registration and login require `Authorization: Bearer <token>`. List endpoints support `limit` (1–100, default 50) and `offset` (default 0), except the project member list.
 
-| Method | Route | Purpose/body |
-|---|---|---|
-| GET | `/api/health` | Database availability |
-| POST | `/api/auth/register` | `name,email,password,role,display_picture?` |
-| POST | `/api/auth/login` | `email,password`; returns token |
-| GET | `/api/users/:id` | Own profile |
-| PATCH | `/api/users/:id` | `name?,email?,display_picture?` |
-| DELETE | `/api/users/:id` | Delete own account |
-| POST | `/api/projects` | `name,description?` |
-| GET | `/api/projects` | Accessible projects |
-| GET | `/api/projects/:id` | Project details |
-| PATCH | `/api/projects/:id` | Owner: `name?,description?` |
-| DELETE | `/api/projects/:id` | Owner: delete project |
-| GET | `/api/projects/:id/members` | Assigned reviewers |
-| POST | `/api/projects/:id/members` | Owner: `userId` of reviewer |
-| DELETE | `/api/projects/:id/members/:userId` | Owner: remove reviewer |
-| POST | `/api/submissions` | `projectId,title,code,filename?,language?` |
-| GET | `/api/projects/:id/submissions` | Project submissions |
-| GET | `/api/submissions/:id` | Code and status |
-| PATCH | `/api/submissions/:id` | Author: `code,title?`, while pending/changes requested |
-| PATCH | `/api/submissions/:id/status` | `status,feedback?` |
-| DELETE | `/api/submissions/:id` | Author: delete submission |
-| GET | `/api/submissions/:id/comments` | General and inline comments |
-| POST | `/api/submissions/:id/comments` | Reviewer: `body,line?` (1-based) |
-| PATCH | `/api/comments/:id` | Comment author: `body` |
-| DELETE | `/api/comments/:id` | Comment author |
-| POST | `/api/submissions/:id/approve` | Reviewer: `feedback?` |
-| POST | `/api/submissions/:id/request-changes` | Reviewer: `feedback?` |
-| GET | `/api/submissions/:id/reviews` | Review history |
-| GET | `/api/users/:id/notifications` | Own activity feed |
-| GET | `/api/projects/:id/stats` | Project analytics |
+| Method      | Route                                   | Purpose/body                                          |
+|-------------|-----------------------------------------|-------------------------------------------------------|
+| GET         | `/api/health`                           | Database availability                                 |
+| POST        | `/api/auth/register`                    | `name,email,password,role,display_picture?`           |
+| POST        | `/api/auth/login`                       | `email,password`; returns token                       |
+| GET         | `/api/users/:id`                        | Own profile                                           |
+| PATCH       | `/api/users/:id`                        | `name?,email?,display_picture?`                       |
+| DELETE      | `/api/users/:id`                        | Delete own account                                    |
+| POST        | `/api/projects`                         | `name,description?`                                   |
+| GET         | `/api/projects`                         | Accessible projects                                   |
+| GET         | `/api/projects/:id`                     | Project details                                       |
+| PATCH       | `/api/projects/:id`                     | Owner: `name?,description?`                           |
+| DELETE      | `/api/projects/:id`                     | Owner: delete project                                 |
+| GET         | `/api/projects/:id/members`             | Assigned reviewers                                    |
+| POST        | `/api/projects/:id/members`             | Owner: `userId` of reviewer                           |
+| DELETE      | `/api/projects/:id/members/:userId`     | Owner: remove reviewer                                | 
+| POST        | `/api/submissions`                      | `projectId,title,code,filename?,language?`            |
+| GET         | `/api/projects/:id/submissions`         | Project submissions                                   |
+| GET         | `/api/submissions/:id`                  | Code and status                                       |
+| PATCH       | `/api/submissions/:id`                  | Author: `code,title?`, while pending/changes requested|
+| PATCH       | `/api/submissions/:id/status`           | `status,feedback?`                                    |
+| DELETE      | `/api/submissions/:id`                  | Author: delete submission                             |
+| GET         | `/api/submissions/:id/comments`         | General and inline comments                           |
+| POST        | `/api/submissions/:id/comments`         | Reviewer: `body,line?` (1-based)                      |
+| PATCH       | `/api/comments/:id`                     | Comment author: `body`                                |
+| DELETE      | `/api/comments/:id`                     | Comment author                                        |
+| POST        | `/api/submissions/:id/approve`          | Reviewer: `feedback?`                                 |
+| POST        | `/api/submissions/:id/request-changes`  | Reviewer: `feedback?`                                 |
+| GET         | `/api/submissions/:id/reviews`          | Review history                                        |
+| GET         | `/api/users/:id/notifications`          | Own activity feed                                     |
+| GET         | `/api/projects/:id/stats`               | Project analytics                                     |
+|-------------|-----------------------------------------|-------------------------------------------------------|
 
 Registration provides the create operation for profile CRUD. PATCH is used for partial updates.
 

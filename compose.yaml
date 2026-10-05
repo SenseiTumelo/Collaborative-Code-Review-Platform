@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_DB: code_review
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: Learner0123
     ports:
       - "5432:5432"
     volumes:
